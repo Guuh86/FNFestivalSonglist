@@ -1,0 +1,29 @@
+.card-item {
+  margin: 0 0 0 -15px;
+  display: flex;
+  align-items: stretch; /* Faz a imagem e o conteúdo se esticarem igualmente */
+}
+
+.card-img {
+  flex: 0 0 120px; /* Define a largura da imagem */
+  height: 100%; /* Faz com que a imagem ocupe toda a altura do card */
+  object-fit: cover; /* Faz a imagem cobrir a área sem distorção */
+}
+
+.card-content {
+  flex: 1; /* Faz o conteúdo ocupar o restante do espaço ao lado da imagem */
+  padding: 16px; /* Adiciona algum espaçamento interno */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza verticalmente o conteúdo */
+}
+
+#segment{
+  margin: 0 20px 0 20px;
+}
+
+.cronometro {
+  text-align: center;
+  font-size: 13px;
+  margin: 10px 0 10px 0;
+}

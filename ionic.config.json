@@ -1,0 +1,7 @@
+{
+  "name": "fnfestival",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

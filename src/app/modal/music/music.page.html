@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true">VOLTAR</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-img [src]="data.value.cover"></ion-img>
+  </ion-card>
+  
+  <ion-card>
+    <ion-item-divider>
+      Ouvir Prévia
+    </ion-item-divider>
+    <audio controls [src]="data.value.previewUrl"></audio>
+  </ion-card>
+
+  <ion-card>
+    <ion-item-divider>Dificuldades</ion-item-divider>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-avatar slot="start">
+            <ion-img
+              src="https://lh3.googleusercontent.com/d/1RFLbpBuYUzdWWOCat-frFeDSr2cDRzA0=s220?authuser=0"></ion-img>
+          </ion-avatar>
+          <ion-progress-bar *ngFor="let progress of progressBars; let i = index" type="determinate"
+            [value]="i < (data.value.difficulties.drums + 1) ? 1 : 0"
+            [color]="getProgressBarDrums(i)"
+            >
+          </ion-progress-bar>
+        </ion-item>
+        <ion-item>
+          <ion-avatar slot="start">
+            <ion-img
+              src="https://lh3.googleusercontent.com/d/1jB764ZqfA1iOXCCoDgPGXHnN8_F9JvWm=s220?authuser=0"></ion-img>
+          </ion-avatar>
+          <ion-progress-bar *ngFor="let progress of progressBars; let i = index" slot="end" type="determinate"
+            [value]="i < (data.value.difficulties.bass + 1) ? 1 : 0"
+            [color]="getProgressBarBass(i)"
+            >
+          </ion-progress-bar>
+        </ion-item>
+        <ion-item>
+          <ion-avatar slot="start">
+            <ion-img
+              src="https://lh3.googleusercontent.com/d/1uXiqpbRHf_LhqEqEsWvXNKQRIPqXqtVs=s220?authuser=0"></ion-img>
+          </ion-avatar>
+          <ion-progress-bar *ngFor="let progress of progressBars; let i = index" slot="end" type="determinate"
+            [value]="i < (data.value.difficulties.vocals + 1) ? 1 : 0"
+            [color]="getProgressBarVocals(i)"
+            >
+          </ion-progress-bar>
+        </ion-item>
+        <ion-item>
+          <ion-avatar slot="start">
+            <ion-img
+              src="https://lh3.googleusercontent.com/d/1NzWGBHBhLf7O0rQZXJS_6rGt4Cs6H0Eu=s220?authuser=0"></ion-img>
+          </ion-avatar>
+          <ion-progress-bar *ngFor="let progress of progressBars; let i = index" slot="end" type="determinate"
+            [value]="i < (data.value.difficulties.guitar + 1) ? 1 : 0"
+            [color]="getProgressBarGuitar(i)"
+            >
+          </ion-progress-bar>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-item-divider>Informações da Música</ion-item-divider>
+    <ion-card-content>
+      <ion-item>
+        <p>{{data.value.title}} - {{data.value.artist}}</p>
+      </ion-item>
+      <ion-item>
+        <p>
+          Ano de Lançamento: {{data.value.releaseYear}}
+        </p>
+      </ion-item>
+    </ion-card-content>
+    <ion-item lines="none">
+      <p slot="end" style="font-size: 10px; color: silver;">
+        Última atualização: {{data.value.lastModified | date}}
+      </p>
+    </ion-item>
+  </ion-card>
+</ion-content>

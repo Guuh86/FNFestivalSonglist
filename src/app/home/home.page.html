@@ -1,0 +1,85 @@
+<ion-content [fullscreen]="true" id="main-content">
+  <ion-searchbar animated="true" placeholder="Pesquisar Música" [(ngModel)]="searchQuery" (ionInput)="filterItems()"
+    debounce="0"></ion-searchbar>
+
+  <div id="segment">
+    <ion-segment value="daily" ([ngModel])="segmentValue">
+      <ion-segment-button value="daily" (click)="changeDaily()">
+        <ion-label>Daily</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="news" (click)="changeNews()">
+        <ion-label>News</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="all" (click)="changeAll()">
+        <ion-label>Songlist</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <span *ngIf="filteredItems.length === 0 && searchQuery.trim() !== ''">
+    <div>
+      <p style="text-align: center; font-size: 15px;">
+        Vish!<br />
+        Não encontramos nenhum resultado <br> para o termo inserido :(<br />
+        Confere aqui abaixo a songlist completinha :D
+      </p>
+    </div>
+  </span>
+
+  <span *ngIf="filteredItems.length > 0">
+    <span *ngFor="let item of filteredItems">
+      <ion-card>
+        <ion-item class="card-item" button (click)="openModal(item)">
+          <ion-img class="card-img" [src]="item.value.cover"></ion-img>
+          <ion-card-content class="card-content">
+            <ion-card-title>{{item.value.title}}</ion-card-title>
+            &nbsp;
+            <ion-card-subtitle>
+              {{item.value.artist}} | {{item.value.releaseYear}}
+            </ion-card-subtitle>
+          </ion-card-content>
+        </ion-item>
+      </ion-card>
+    </span>
+  </span>
+
+  <div *ngIf="segmentValue === 'daily' && filteredItems.length <= 0">
+    <div class="cronometro">
+      <p>
+        Próxima Rotação em:
+        {{ time }}
+      </p>
+    </div>
+    <span *ngFor="let x of ftItems; let i = index">
+      <ion-card>
+        <ion-item class="card-item" button (click)="openModal(x)">
+          <ion-img class="card-img" [src]="x.value.cover"></ion-img>
+          <ion-card-content class="card-content">
+            <ion-card-title>{{x.value.title}}</ion-card-title>
+            &nbsp;
+            <ion-card-subtitle>
+              {{x.value.artist}} | {{x.value.releaseYear}}
+            </ion-card-subtitle>
+          </ion-card-content>
+        </ion-item>
+      </ion-card>
+    </span>
+  </div>
+
+  <div *ngIf="segmentValue === 'all' && filteredItems.length <= 0">
+    <span *ngFor="let x of data | keyvalue">
+      <ion-card>
+        <ion-item class="card-item" button (click)="openModal(x)">
+          <ion-img class="card-img" [src]="x.value.cover"></ion-img>
+          <ion-card-content class="card-content">
+            <ion-card-title>{{x.value.title}}</ion-card-title>
+            &nbsp;
+            <ion-card-subtitle>
+              {{x.value.artist}} | {{x.value.releaseYear}}
+            </ion-card-subtitle>
+          </ion-card-content>
+        </ion-item>
+      </ion-card>
+    </span>
+  </div>
+</ion-content>
